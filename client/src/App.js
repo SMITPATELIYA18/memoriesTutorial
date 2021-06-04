@@ -1,53 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
-import { useDispatch } from "react-redux";
-
-import memories from "./Images/memories.png";
-import Posts from "./Components/Posts/Posts";
-import Form from "./Components/Form/Form";
-import useStyles from "./Styles";
-import { getPosts } from "./Actions/Posts";
+import React from "react";
+import { Container } from "@material-ui/core";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Home from "./Components/Home/Home";
+import Navbar from "./Components/Navbar/Navbar";
+import Auth from "./Components/Auth/Auth";
 
 const App = () => {
-  const [currentId, setCurrentId] = useState(null);
-  const classes = useStyles();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [dispatch]);
   return (
-    <Container maxidth="lg">
-      <AppBar className={classes.appBar} position="static" color="inherit">
-        <Typography className={classes.heading} variant="h2" align="center">
-          Memories
-        </Typography>
-        <img
-          className={classes.image}
-          src={memories}
-          alt="memories"
-          height="60"
-        />
-      </AppBar>
-      <Grow in>
-        <Container>
-          <Grid
-            container
-            justify="space-between"
-            alignItems="stretch"
-            spacing={3}
-            className={classes.mainContainer}
-          >
-            <Grid item xs={12} sm={7}>
-              <Posts setCurrentId={setCurrentId} />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <Form currentId={currentId} setCurrentId={setCurrentId} />
-            </Grid>
-          </Grid>
-        </Container>
-      </Grow>
-    </Container>
+    <BrowserRouter>
+      <Container maxidth="lg">
+        <Navbar />
+        <Switch>
+          <Route path="/" exact component={Home}/>
+          <Route path="/auth" exact component={Auth}/>
+        </Switch>
+      </Container>
+    </BrowserRouter>
   );
 };
 

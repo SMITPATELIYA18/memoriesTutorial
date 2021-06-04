@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import postRoutes from "./Routes/Posts.js";
+import userRoutes from "./Routes/Users.js";
 
 const app = express();
 dotenv.config();
@@ -12,6 +13,7 @@ app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.use("/posts", postRoutes);
+app.use("/users", userRoutes);
 
 // const CONNECTION_URL =
 //  "mongodb+srv://meroriesTutorial:meroriesTutorial18@cms.ypnxp.mongodb.net/MemoriesTutorial?retryWrites=true&w=majority";
