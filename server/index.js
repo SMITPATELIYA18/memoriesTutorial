@@ -15,8 +15,6 @@ app.use(cors());
 app.use("/posts", postRoutes);
 app.use("/users", userRoutes);
 
-// const CONNECTION_URL =
-//  "mongodb+srv://meroriesTutorial:meroriesTutorial18@cms.ypnxp.mongodb.net/MemoriesTutorial?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 5000;
 
 mongoose
