@@ -28,7 +28,12 @@ export const getPost = async (req, res) => {
   const { id } = req.params;
   try {
     const post = await postMessage.findById(id);
-    res.status(200).json(post);
+    const posts = await postMessage
+      .find({
+        tags: { $in: post.tags },
+      })
+      .limit(4);
+    res.status(200).json({ post, posts });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -43,7 +48,7 @@ export const getPostsBySearch = async (req, res) => {
     });
     res.status(200).json({ data: posts });
   } catch (error) {
-    res.status(404).json({ message: error,title: title });
+    res.status(404).json({ message: error, title: title });
   }
 };
 
