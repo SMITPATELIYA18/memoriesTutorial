@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Container,
   Grow,
@@ -15,7 +15,7 @@ import ChipInput from "material-ui-chip-input";
 import Pagination from "../Pagination";
 import Posts from "../Posts/Posts";
 import Form from "../Form/Form";
-import { getPosts, getPostsBySearch } from "../../Actions/Posts";
+import { getPostsBySearch } from "../../Actions/Posts";
 import useStyles from "./styles";
 
 function useQuery() {
@@ -30,7 +30,6 @@ const Home = () => {
   const history = useHistory();
   const page = query.get("page") || 1;
   const searchQuery = query.get("searchQuery");
-  const tagsQuery = query.get("tags");
   const [search, setSearch] = useState("");
   const [tags, setTags] = useState([]);
 

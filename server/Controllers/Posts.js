@@ -12,17 +12,25 @@ export const getPosts = async (req, res) => {
       .sort({ _id: -1 })
       .limit(LIMIT)
       .skip(startIndex);
-    const number = Math.ceil(total / LIMIT)
-    res
-      .status(200)
-      .json({
-        data: posts,
-        currentPage: Number(page),
-        numberOfPages: number,
-      });
+    const number = Math.ceil(total / LIMIT);
+    res.status(200).json({
+      data: posts,
+      currentPage: Number(page),
+      numberOfPages: number,
+    });
     // postMessages.forEach((post) => console.log(post._id));
   } catch (error) {
-    res.status(404).json({ Message: error });
+    res.status(404).json({ Message: error.message });
+  }
+};
+
+export const getPost = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const post = await postMessage.findById(id);
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
   }
 };
 
@@ -35,7 +43,7 @@ export const getPostsBySearch = async (req, res) => {
     });
     res.status(200).json({ data: posts });
   } catch (error) {
-    res.status(404).json({ message: error.Message });
+    res.status(404).json({ message: error,title: title });
   }
 };
 
@@ -51,7 +59,7 @@ export const createPost = async (req, res) => {
     res.status(201).json(newPost);
   } catch (error) {
     console.log(error);
-    res.status(409).json({ Message: error.Message });
+    res.status(409).json({ Message: error.message });
   }
 };
 

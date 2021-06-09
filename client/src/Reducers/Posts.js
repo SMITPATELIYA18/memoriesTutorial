@@ -7,11 +7,13 @@ import {
   FETCH_BY_SEARCH,
   START_LOADING,
   END_LOADING,
+  FETCH_POST,
 } from "../Constants/ActionTypes";
 // eslint-disable-next-line
 export default (state = { isLoading: true, posts: [] }, action) => {
   switch (action.type) {
     case FETCH_BY_SEARCH:
+      console.log(state);
       return { ...state, posts: action.payload };
     case FETCH_ALL:
       return {
@@ -20,6 +22,8 @@ export default (state = { isLoading: true, posts: [] }, action) => {
         currentPage: action.payload.currentPage,
         numberOfPages: action.payload.numberOfPages,
       };
+    case FETCH_POST:
+      return { ...state, post: action.payload };
     case DELETE:
       return {
         ...state,
